@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/side_nav_bar"
+    android:orientation="vertical"
+    >
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+    <include
+        layout="@layout/login_logo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintTop_toBottomOf="@id/imgLogo"
+
+        >
+
+
+        <LinearLayout
+                android:padding="9dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+
+        >
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/loginproveedor_lbl"
+                      android:layout_gravity="center_horizontal"
+                      android:textColor="@color/textBLack"
+                      android:layout_marginTop="5dp"
+                      android:textSize="@dimen/sizeLoginRelleno"
+                      android:foregroundGravity="center"
+                      android:gravity="center_horizontal"
+            />
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_correo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="5dp"
+            >
+
+                <EditText
+                        android:id="@+id/dni"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/hint_dni"
+                        android:maxLength="11"
+                        android:inputType="number"
+                        android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="5dp"
+            >
+
+                <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/hint_password"
+                        android:inputType="textPassword"
+                        android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="end"
+                android:layout_marginRight="17dp"
+                >
+
+                <CheckBox
+                    android:checked="true"
+                    android:textSize="@dimen/sizeLogin"
+                    android:id="@+id/guardar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:text="Guardar Contraseña" />
+            </LinearLayout>
+            <Button
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btnIngresar"
+                    style="@style/btnNoBorder"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_btnusuarioregistrado"
+                    android:textSize="@dimen/sizeBtnLogin"
+                    android:textColor="@color/textWhite"
+                    android:background="@drawable/btn_cornerlogin"
+                    android:layout_gravity="center_horizontal"
+            />
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="center"
+            >
+
+
+                <Button
+                        android:id="@+id/btnRegistrar"
+                        style="@style/btnNoBorder"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/login_accederregistrar"
+                        android:textSize="@dimen/sizeBtnLogin"
+                        android:textColor="@color/textBLack"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/btn_transparent"
+
+                />
+                <Button
+                        android:id="@+id/btnOlvide"
+                        style="@style/btnNoBorder"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/login_accederolvide"
+                        android:textSize="@dimen/sizeBtnLogin"
+                        android:textColor="@color/textBLack"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/btn_transparent"
+
+                />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

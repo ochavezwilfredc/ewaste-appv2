@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+          >
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:id="@+id/direccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Direccion"
+                        android:textColor="@color/textBLack"
+                        android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    >
+                    <Button
+                        android:background="@color/colorPrimary"
+                        android:id="@+id/btnLlego"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:gravity="center"
+                        android:minWidth="120dp"
+                        android:minHeight="35dp"
+                        android:layout_gravity="center"
+                        android:padding="0dp"
+                        android:text="YA LLEGUE"
+                        android:textColor="@color/textWhite"
+                        android:textSize="13sp"
+                        android:layout_marginBottom="5dp"
+                        />
+                </LinearLayout>
+
+
+            </LinearLayout>
+    <LinearLayout
+        android:id="@+id/contenedorLlego"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:id="@+id/txtSalioProveedor"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salio el Proveedor ?"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/textBLack"
+            android:textSize="16sp" />
+        <Button
+            android:background="@color/colorPrimary"
+            android:id="@+id/btnSalioProveedor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minWidth="150dp"
+            android:minHeight="35dp"
+            android:layout_gravity="center"
+            android:padding="0dp"
+            android:text="SI"
+            android:textColor="@color/textWhite"
+            android:textSize="13sp"
+            android:layout_marginBottom="15dp"
+            />
+        <TextView
+            android:id="@+id/txtEspera"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiempo de Espera 5 min."
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/textBLack"
+            android:textSize="16sp" />
+        <Button
+            android:background="@color/colorRed"
+            android:id="@+id/btnAusente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minWidth="150dp"
+            android:minHeight="35dp"
+            android:layout_gravity="center"
+            android:padding="0dp"
+            android:text="PROVEEDOR AUSENTE"
+            android:textColor="@color/textWhite"
+            android:textSize="13sp"
+            android:layout_marginBottom="15dp"
+            android:visibility="gone"
+            />
+    </LinearLayout>
+</LinearLayout>
+
+

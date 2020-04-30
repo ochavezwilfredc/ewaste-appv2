@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">EasyWaste</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+
+    <string name="menu_account">Cuenta</string>
+
+    <string name="menu_delivery">Realizar pedido</string>
+    <string name="menu_datos">Datos Personales</string>
+    <string name="menu_servicio">Solicitar Servicio</string>
+    <string name="menu_logout">Cerrar Sesión</string>
+
+    <string name="api_google">AIzaSyC4x7Q85elwIfzkxsU2yLK6NfhQ_QicJ_w</string>
+    <string name="action_servicio">Solicitar Servicio</string>
+    <string name="login_lblproveedor">Eres Proveedor?</string>
+    <string name="login_btnproveedor">Ingresar como proveedor</string>
+    <string name="login_lblreciclador">Eres reciclador?</string>
+    <string name="login_btnreciclador">Ingresar como reciclador</string>
+    <string name="login_btnusuarioregistrado">Ingresar</string>
+
+
+    <string name="loginproveedor_lbl">Ingrese sus datos de proveedor.</string>
+    <string name="loginreciclador_lbl">Ingrese sus datos de reciclador.</string>
+
+    <string name="login_nuevousuario">No estoy registrado</string>
+    <string name="login_btnnuevousuario">Registrarme</string>
+    <string name="login_accederregistrar">No Estoy registrado</string>
+    <string name="login_accederolvide">Olvidé mi contraseña</string>
+
+    <string name="registrar_titulo">Registro de Usuario</string>
+    <string name="registrar_rellene">Complete los siguientes campos.</string>
+    <string name="registrar_login">Ya Estoy registrado</string>
+
+    <string name="login_rellene">Ingrese su correo electrónico y contraseña.</string>
+    <string name="hint_dni">DNI o RUC</string>
+    <string name="hint_nombre">Nombre</string>
+    <string name="hint_direccion">Dirección</string>
+
+    <string name="hint_referencia">Referencia</string>
+
+    <string name="hint_apellidopaterno">Apellido Paterno</string>
+    <string name="hint_apellidomaterno">Apellido Materno</string>
+    <string name="hint_correo">Correo electrónico</string>
+    <string name="hint_fechanacimiento">Fecha Nacimiento</string>
+
+    <string name="hint_codigoregistro">Código Registro</string>
+
+    <string name="hint_telefono">Celular</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="btn_registrar">Registrar</string>
+
+    <string name="direccion_continuar">CONTINUAR</string>
+    <string name="direccion_operacion">GUARDAR</string>
+
+    <string name="rcd_tit">AVISO IMPORTANTE</string>
+    <string name="rcd_p1">¿QUIERES SER PARTE DEL EQUIPO ECOLÓGICO?</string>
+    <string name="rcd_paso1tit">PASO 1:</string>
+    <string name="rcd_paso1text">ACERCATE A TU MUNICIPALIDAD MAS CERCANA</string>
+    <string name="rcd_paso2tit">PASO 2:</string>
+    <string name="rcd_paso2text">REGISTRATE CON ELLOS</string>
+    <string name="rcd_paso3tit">PASO 3:</string>
+    <string name="rcd_paso3text">SOLICITA TU CÓDIGO DE REGISTRO</string>
+    <string name="rcd_paso4tit">PASO 4:</string>
+    <string name="rcd_paso4text">INGRESA TU CÓDIGO EN NUESTRO REGISTRO</string>
+
+</resources>

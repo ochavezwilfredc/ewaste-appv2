@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:id="@+id/contenedor"
+    android:visibility="invisible"
+    android:layout_height="wrap_content">
+
+
+
+    <TextView
+        android:layout_marginTop="13dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DATOS DEL RECICLADOR"
+        android:textSize="19sp"
+        android:textColor="@color/textBLack"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        />
+     <TextView
+         android:id="@+id/nombre"
+        android:layout_marginTop="13dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="nombre"
+        android:textSize="16sp"
+        android:textColor="@color/textBLack"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:id="@+id/dni"
+        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dni"
+        android:textSize="16sp"
+        android:textColor="@color/textBLack"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:layout_marginTop="13dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CALIFIQUE AL RECICLADOR"
+        android:textSize="15sp"
+        android:textColor="@color/textBLack"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        />
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:layout_margin="5dp"
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1"
+        android:layout_gravity="center"
+        android:theme="@style/RatingBar"
+        />
+
+    <Button
+        android:layout_marginTop="5dp"
+        android:id="@+id/btnFinalizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FINALIZAR SERVICIO"
+        android:textSize="16sp"
+        android:textColor="@color/textWhite"
+        android:background="@drawable/btn_cornerlogin"
+        android:padding="7dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:layout_gravity="center"
+        />
+
+
+</LinearLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity"
+
+    >
+
+    <TextView
+        android:id="@+id/direccionglobal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        />
+
+    <fragment
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:id="@+id/frg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/infoserviciomapa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="8dp"
+        >
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                >
+                <TextView
+                    android:id="@+id/reciclador"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RECICLADOR"
+                    android:textColor="@color/textBLack"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/dni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DNI"
+                    android:textColor="@color/textBLack"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tiempoestimado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tiempo Estimado"
+                    android:textColor="@color/textBLack"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                >
+
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    >
+                    <Button
+                        android:background="@color/textWhite"
+                        android:id="@+id/btnCancelar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="1dp"
+                        android:gravity="center"
+                        android:minWidth="80dp"
+                        android:minHeight="35dp"
+                        android:layout_gravity="center"
+                        android:padding="0dp"
+                        android:text="CANCELAR"
+                        android:textColor="@color/textBLack"
+                        android:textSize="13sp"
+                        android:visibility="gone"
+
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/txtLlego"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="11dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:textColor="@color/colorRed"
+                android:text="EL RECICLADOR LLEGO AL DESTINO"
+                android:visibility="gone"
+                ></TextView>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

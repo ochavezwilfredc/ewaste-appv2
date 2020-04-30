@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="20dp"
+
+
+        >
+    <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            map:liteMode="true"
+            map:cameraZoom="16"
+            map:mapType="normal"
+    />
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="15dp"
+            >
+
+        <EditText
+                android:id="@+id/referencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_referencia"
+                android:inputType="textMultiLine"
+                android:singleLine="false"
+                android:lines="3"
+                />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>

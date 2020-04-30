@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="10dp"
+                android:minWidth="200dp"
+
+
+        >
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/textBLack"
+        android:text="CONFIRMACIÓN DE SERVICIO"
+        ></TextView>
+
+    <TextView
+        android:layout_marginTop="4dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:textColor="@color/colorRed"
+        android:textStyle="bold"
+        android:text="AVISO IMPORTANTE"
+        ></TextView>
+    <TextView
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:textColor="@color/colorRed"
+        android:text="1.- Su reciclaje debe ser mayor a 5 kilos."
+        ></TextView>
+    <TextView
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:textColor="@color/colorRed"
+        android:text="2.- Debe estar en material de ciclaje."
+        ></TextView>
+    <TextView
+        android:layout_marginTop="5dp"
+
+            android:id="@+id/direccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@color/textBLack"
+            android:text="-"
+
+        ></TextView>
+    <TextView
+        android:layout_marginTop="5dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:textColor="@color/colorRed"
+        android:text="Seleccionar Imagen"
+        android:visibility="gone"
+        ></TextView>
+    <ImageView
+        android:id="@+id/seleccionar_imagen"
+        style="?android:borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/upload"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        >
+
+        <EditText
+                android:id="@+id/referencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+            android:textSize="13sp"
+                android:hint="@string/hint_referencia"
+                android:inputType="textMultiLine"
+                android:singleLine="false"
+                android:lines="2"
+                />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/btnConfirmar"
+            style="@style/btnNoBorder"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="CONFIRMAR"
+            android:textSize="@dimen/sizeBtnLogin"
+            android:textColor="@color/textWhite"
+            android:background="@drawable/btn_cornerlogin"
+            android:layout_gravity="center_horizontal"
+            />
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/btnCancelar"
+        style="@style/btnNoBorder"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="CANCELAR"
+        android:textSize="@dimen/sizeBtnLogin"
+        android:textColor="@color/textBLack"
+
+        android:background="@drawable/btn_cornercancelar"
+        android:layout_gravity="center_horizontal"
+        />
+    </LinearLayout>

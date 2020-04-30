@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textBLack"
+        android:visibility="gone"
+        />
+    <androidx.cardview.widget.CardView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:padding="5dp"
+                android:orientation="vertical" android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_marginRight="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Proveedor:"
+                        android:textSize="13sp"
+                        android:textColor="@color/textBLack"
+                        android:textStyle="bold"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/proveedor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Proveedor :"
+                        android:textSize="13sp"
+                        android:textColor="@color/textBLack" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_marginRight="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha:"
+                        android:textSize="13sp"
+                        android:textColor="@color/textBLack"
+                        android:textStyle="bold"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/fecha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="fecha"
+                        android:textSize="13sp"
+                        android:textColor="@color/textBLack" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal" android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:layout_marginRight="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hora:"
+                        android:textSize="13sp"
+                        android:textColor="@color/textBLack"
+                        android:textStyle="bold"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/hora"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="fecha"
+                        android:textSize="13sp"
+                        android:textColor="@color/textBLack" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center">
+
+                <Button
+                    android:id="@+id/btnAtender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="@drawable/btn_cornerlogin"
+                    android:gravity="center"
+                    android:minWidth="80dp"
+                    android:minHeight="30dp"
+                    android:layout_gravity="center"
+                    android:padding="0dp"
+                    android:text="ATENDER"
+                    android:textColor="@color/textWhite"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

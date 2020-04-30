@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                     xmlns:tools="http://schemas.android.com/tools"
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="match_parent"
+                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                     tools:context=".MainActivity"
+
+>
+
+    <TextView
+        android:id="@+id/direccionglobal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        />
+
+    <fragment
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:id="@+id/frg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/infoserviciomapa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="8dp"
+        >
+
+        <FrameLayout android:id="@+id/subfragmento"
+            android:tag="dialog"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

@@ -1,0 +1,15 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">13dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">135dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="sizeLogin">15sp</dimen>
+    <dimen name="sizeBtnLogin">13sp</dimen>
+    <dimen name="sizeRegistrar">15sp</dimen>
+    <dimen name="sizeLoginRelleno">14sp</dimen>
+    <dimen name="sizeTitulo">20sp</dimen>
+    <dimen name="marginInputsRegistrar">5dp</dimen>
+
+</resources>

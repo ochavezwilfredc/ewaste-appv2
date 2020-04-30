@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                     xmlns:tools="http://schemas.android.com/tools"
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="match_parent"
+                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                     tools:context=".MainActivity"
+
+>
+
+
+
+    <fragment
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:id="@+id/frg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="20dp"
+            >
+        <Button
+                android:id="@+id/btnSolicitarServicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_servicio"
+                android:textSize="20sp"
+                android:textColor="@color/textWhite"
+                android:background="@drawable/button_corner"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                android:focusable="true"
+                android:clickable="true"
+
+                />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
