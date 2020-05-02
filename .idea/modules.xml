@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/Ewaste.iml" filepath="$PROJECT_DIR$/Ewaste.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ewaste.iml" filepath="$PROJECT_DIR$/.idea/ewaste.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ewaste-appv2.iml" filepath="$PROJECT_DIR$/ewaste-appv2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/ewaste-appv2-app.iml" filepath="$PROJECT_DIR$/app/ewaste-appv2-app.iml" />
     </modules>
   </component>
 </project>

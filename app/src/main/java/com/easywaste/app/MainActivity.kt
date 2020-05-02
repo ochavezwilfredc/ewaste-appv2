@@ -1,5 +1,6 @@
 package com.easywaste.app
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -32,6 +33,7 @@ import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.annotation.Nullable
 import androidx.cardview.widget.CardView
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -39,6 +41,7 @@ import com.android.volley.toolbox.Volley
 import com.easywaste.app.Clases.*
 import com.google.android.gms.maps.model.LatLng
 import org.json.JSONObject
+import pub.devrel.easypermissions.EasyPermissions
 import java.lang.Exception
 import java.util.*
 
@@ -50,7 +53,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     var cantPintrash:TextView?=null
     var OK = false
     @SuppressLint("MissingPermission")
-    override fun onCreate(savedInstanceState: Bundle?) {
+
+    override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Prefs.getInstance(applicationContext,true)
@@ -146,6 +150,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         }
 
+        EasyPermissions.requestPermissions(this, getString(R.string.rationale_gps),
+            ClsLocalizacion.RC_FINELOCATION, Manifest.permission.ACCESS_FINE_LOCATION);
 
     }
 
@@ -301,6 +307,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else {
             super.onBackPressed()
         }
+
     }
 
 

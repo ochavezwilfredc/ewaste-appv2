@@ -74,5 +74,5 @@
     <string name="rcd_paso3text">SOLICITA TU CÓDIGO DE REGISTRO</string>
     <string name="rcd_paso4tit">PASO 4:</string>
     <string name="rcd_paso4text">INGRESA TU CÓDIGO EN NUESTRO REGISTRO</string>
-
+    <string name="rationale_gps">Esta aplicación necesita acceso al gps.</string>
 </resources>

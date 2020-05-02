@@ -8,10 +8,14 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
+import com.easywaste.app.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -23,11 +27,13 @@ import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import pub.devrel.easypermissions.AfterPermissionGranted
+import pub.devrel.easypermissions.EasyPermissions
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class ClsLocalizacion : OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback{
+class ClsLocalizacion : OnMapReadyCallback, OnRequestPermissionsResultCallback,  EasyPermissions.PermissionCallbacks{
 
 
     var gmap:GoogleMap? = null
@@ -40,7 +46,6 @@ class ClsLocalizacion : OnMapReadyCallback, ActivityCompat.OnRequestPermissionsR
     var activity:AppCompatActivity? = null
      var defaultClick:Boolean = true
      var markers = ArrayList<Marker>()
-
     var clickMarker:Boolean = false
     var markerProveedor:Marker?=null
     var markerReciclador:Marker?=null
@@ -59,13 +64,15 @@ class ClsLocalizacion : OnMapReadyCallback, ActivityCompat.OnRequestPermissionsR
 
      companion object {
          var lastLatLong :LatLng? = null
+         const val RC_FINELOCATION = 201
+
      }
 
      override fun onMapReady(gmaps: GoogleMap) {
         gmap =gmaps
         gmap?.setMapType(GoogleMap.MAP_TYPE_NORMAL)
         gmap?.clear()
-         habilitarLocalizacion()
+         activarFineLccation()
          gmap?.setOnMapClickListener {
              if(clickMarker){
                  gmap!!.clear()
@@ -101,7 +108,7 @@ class ClsLocalizacion : OnMapReadyCallback, ActivityCompat.OnRequestPermissionsR
 
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
-          //  ClsLocalizacion.lastLatLong = LatLng(location.latitude, location.longitude)
+           ClsLocalizacion.lastLatLong = LatLng(location.latitude, location.longitude)
         }
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
         override fun onProviderEnabled(provider: String) {}
@@ -111,7 +118,11 @@ class ClsLocalizacion : OnMapReadyCallback, ActivityCompat.OnRequestPermissionsR
     fun buscarGeoLocalizacion(){
 
         if (gmap != null) {
+            gmap?.clear()
+
             val act : AppCompatActivity = activity as AppCompatActivity
+            locationClient = LocationServices.getFusedLocationProviderClient(act)
+
             locationClient!!.lastLocation
                 .addOnCompleteListener(act) { task ->
                     if (task.isSuccessful && task.result != null) {
@@ -156,22 +167,54 @@ class ClsLocalizacion : OnMapReadyCallback, ActivityCompat.OnRequestPermissionsR
      }
 
     fun activarLocalizacion(){
-        val act : AppCompatActivity = activity as AppCompatActivity
-        locationClient = LocationServices.getFusedLocationProviderClient(act)
+        activarFineLccation()
+
+        /*
         if (ContextCompat.checkSelfPermission(activity!!.applicationContext, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission to access the location is missing.
 
             PermissionUtils.requestPermission( act  , LOCATION_PERMISSION_REQUEST_CODE,
                     Manifest.permission.ACCESS_FINE_LOCATION, true)
+        }
+         */
+    }
 
+    @AfterPermissionGranted(RC_FINELOCATION)
+    private fun activarFineLccation() {
+        if (EasyPermissions.hasPermissions(activity!!, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            Log.e("error", "acceso fine locatio")
+            permisoLocalizacion = true
+            buscarGeoLocalizacion()
+        } else {
+            // Request one permission
+            EasyPermissions.requestPermissions(activity!!, activity!!.getString(R.string.rationale_gps), RC_FINELOCATION, Manifest.permission.ACCESS_FINE_LOCATION);
         }
     }
+
     fun habilitarLocalizacion(){
         activarLocalizacion()
         buscarGeoLocalizacion()
     }
 
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        Log.e("error", "onPermissionsGranted:" + requestCode + ":" + perms.size)
+    }
+
+    @Override
+   override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
+                                           grantResults: IntArray) {
+        // Forward results to EasyPermissions
+       EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+
+
+    /*
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>,
         grantResults: IntArray
@@ -190,7 +233,7 @@ class ClsLocalizacion : OnMapReadyCallback, ActivityCompat.OnRequestPermissionsR
             permisoLocalizacion = true
         }
     }
-
+*/
 
 
 }
