@@ -158,7 +158,7 @@ class Validar {
 class VAR {
     companion object {
        // val url: String = "http://192.168.18.57/www/muni_api/webservice/"
-        val url: String = "http://localhost/www/"
+        val url: String = "http://192.168.43.191/www/"
         var ext: String = ".php"
         fun url(m: String): String {
             return url + "muni_api/webservice/"+ m + ext
@@ -169,7 +169,6 @@ class VAR {
         fun LeerRespuesta(s: String): RespuestaWS? {
 
             try {
-
                 val x = JSONObject(s)
                 return RespuestaWS(x.getInt("estado"), x.getString("mensaje"))
 
@@ -243,6 +242,8 @@ class Prefs {
         val SERVICIORECICLADORID = "serviciorecicladorid"
         val RECICLADOR_ESTADO = "reciclador_estado"
         val TOKEN = "token"
+
+        val posiciones_recicladores = "posicionesrecicladores"
         fun getInstance(context: Context, change: Boolean = false) {
             if (change || instance == null) {
                 instance = CryptoPrefs(context, "easywaste", "EasyWaste!=?")
@@ -263,6 +264,18 @@ class Prefs {
             if (instance != null) {
                 instance?.put(SERVICIOID, id)
             }
+        }
+
+        fun putServicioRecicladoresCercanos(str: String) {
+            if (instance != null) {
+                instance?.put(posiciones_recicladores, str)
+            }
+        }
+        fun pullServicioRecicladoresCercanos(): String {
+            if (instance != null) {
+                return instance?.get(posiciones_recicladores, "")!!
+            }
+            return ""
         }
         fun pullServicioId(): Int {
             if (instance != null) {

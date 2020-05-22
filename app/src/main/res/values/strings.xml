@@ -22,7 +22,7 @@
     <string name="menu_servicio">Solicitar Servicio</string>
     <string name="menu_logout">Cerrar Sesión</string>
 
-    <string name="api_google">AIzaSyC4x7Q85elwIfzkxsU2yLK6NfhQ_QicJ_w</string>
+    <string name="api_google">AIzaSyBPWU8VYU8QC_oFQUV6QjPN4N6re340V0s</string>
     <string name="action_servicio">Solicitar Servicio</string>
     <string name="login_lblproveedor">Eres Proveedor?</string>
     <string name="login_btnproveedor">Ingresar como proveedor</string>
@@ -75,4 +75,7 @@
     <string name="rcd_paso4tit">PASO 4:</string>
     <string name="rcd_paso4text">INGRESA TU CÓDIGO EN NUESTRO REGISTRO</string>
     <string name="rationale_gps">Esta aplicación necesita acceso al gps.</string>
+    <string name="rationale_camara">Esta aplicación necesita acceso a la camara gps.</string>
+    <string name="rationale_storage">Esta aplicación necesita acceso al almacenamiento.</string>
+
 </resources>

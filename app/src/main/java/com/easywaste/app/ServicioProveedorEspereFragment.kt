@@ -15,6 +15,9 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.easywaste.app.Clases.*
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
 
@@ -23,15 +26,22 @@ class ServicioProveedorEspereFragment : Fragment() {
     var OK = true
     var btnCancelarServicio:Button?= null
     var mainActivity:MainActivity?=null
-
+    var loc : ClsLocalizacion? =null
+    var posicionProveedor : LatLng? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
+
         val view = inflater.inflate(R.layout.servicio_proveedor_espere, container, false)
         mainActivity = activity as MainActivity
+        loc = ClsLocalizacion(mainActivity)
+
+        val mapFragment: SupportMapFragment = childFragmentManager.findFragmentById(R.id.frg) as SupportMapFragment
+        mapFragment.getMapAsync(loc)
+
         btnCancelarServicio= view.findViewById<Button>(R.id.btnCancelar)
         btnCancelarServicio?.setOnClickListener {
             val builder = AlertDialog.Builder(activity!!)
@@ -43,7 +53,6 @@ class ServicioProveedorEspereFragment : Fragment() {
                     DialogInterface.BUTTON_POSITIVE -> cancelarServicio()
                 }
             }
-
             builder.setPositiveButton("SI",dialogClickListener)
             builder.setNegativeButton("NO",dialogClickListener)
             val dialog = builder.create()
@@ -66,7 +75,7 @@ class ServicioProveedorEspereFragment : Fragment() {
 
             }
         })
-
+        loc!!.gmap?.clear()
         return view
     }
 
@@ -83,8 +92,29 @@ class ServicioProveedorEspereFragment : Fragment() {
 
                 if(response!=null){
                     if(response.getInt("estado") == 200 ){
+
                         val datos =  response.getJSONObject("datos")
                         val estado = datos.getString("estado")
+                        val latitud = datos.getDouble("latitud")
+                        val longitud = datos.getDouble("longitud")
+                        if(posicionProveedor==null){
+                            loc!!.gmap?.clear()
+                            posicionProveedor = LatLng(latitud,longitud)
+                            val markerproveedor = loc!!.markerProveedor(posicionProveedor!!)
+                            loc!!.agregarMarcador(markerproveedor)
+                            val reciclado = Prefs.pullServicioRecicladoresCercanos()
+                            if(reciclado !=""){
+                                val data = JSONArray(Prefs.pullServicioRecicladoresCercanos())
+                                for (i in 0 until data.length()){
+                                    val ele = data.getJSONObject(i)
+                                    val posicionReciclador = LatLng(ele.getDouble("lat"),ele.getDouble("lng"))
+                                    val markerpreciclador = loc!!.markerReciclador(posicionReciclador)
+                                    loc!!.agregarMarcador(markerpreciclador)
+                                }
+                            }
+
+                        }
+
 
 
                         if(estado == "Abierto"){

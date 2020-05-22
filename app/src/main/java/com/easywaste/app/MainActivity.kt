@@ -4,45 +4,44 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
-import android.view.MenuItem
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import android.view.Menu
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import com.google.android.libraries.places.api.Places
-import org.angmarch.views.NiceSpinner
-import java.util.Arrays.asList
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.net.Uri
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.Nullable
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.easywaste.app.Clases.*
+import com.easywaste.app.Clases.ClsLocalizacion
+import com.easywaste.app.Clases.Prefs
+import com.easywaste.app.Clases.VAR
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.places.api.Places
+import com.google.android.material.navigation.NavigationView
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import org.angmarch.views.NiceSpinner
 import org.json.JSONObject
 import pub.devrel.easypermissions.EasyPermissions
-import java.lang.Exception
 import java.util.*
 
 
@@ -116,6 +115,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 }
             })
+            Dexter.withActivity(this)
+                .withPermissions(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ).withListener(object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) { /* ... */
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(
+                        permissions: List<PermissionRequest?>?,
+                        token: PermissionToken?
+                    ) { /* ... */
+                    }
+                }).check()
+
 
         }else if(rolid==2){
             //RECICLADOR
@@ -148,10 +163,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
 
+            Dexter.withActivity(this)
+                .withPermissions(
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ).withListener(object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) { /* ... */
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(
+                        permissions: List<PermissionRequest?>?,
+                        token: PermissionToken?
+                    ) { /* ... */
+                    }
+                }).check()
+
         }
 
-        EasyPermissions.requestPermissions(this, getString(R.string.rationale_gps),
-            ClsLocalizacion.RC_FINELOCATION, Manifest.permission.ACCESS_FINE_LOCATION);
 
     }
 

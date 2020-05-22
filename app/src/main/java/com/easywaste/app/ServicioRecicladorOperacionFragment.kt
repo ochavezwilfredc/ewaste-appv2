@@ -114,6 +114,7 @@ class ServicioRecicladorOperacionFragment : Fragment() {
 
 
                     } catch (e: Exception) {
+                        Log.e("error", e.message.toString())
                         Toast.makeText(context,  "Error de estimación", Toast.LENGTH_SHORT).show()
                         e.printStackTrace()
                     }
@@ -182,8 +183,10 @@ class ServicioRecicladorOperacionFragment : Fragment() {
                         SERVICIO_DIRECCION = ClsServicioDireccion("" , LatLng(latitud,longitud))
 
                         if(estado == "Abierto"){
+                            cardViewInfo?.visibility = View.VISIBLE
                             childFragmentManager.beginTransaction().replace(R.id.subfragmento, ServicioRecicladorAceptarFragment()).commit()
                         }else if (estado == "En Camino"||estado == "En Atencion"){
+                            cardViewInfo?.visibility = View.VISIBLE
                             childFragmentManager.beginTransaction().replace(R.id.subfragmento, ServicioRecicladorLlegoFragment()).commit()
                         }else if(estado=="Finalizado"){
                             Prefs.putServicioRecicladorId(0)
@@ -208,6 +211,7 @@ class ServicioRecicladorOperacionFragment : Fragment() {
                     Toast.makeText(context,  "Error de conexión", Toast.LENGTH_SHORT).show()
                     fragmentManager?.popBackStackImmediate()
                 }
+
 
             }) {
             override fun getHeaders(): Map<String, String> {
@@ -255,7 +259,7 @@ class ServicioRecicladorOperacionFragment : Fragment() {
             Response.Listener { response ->
 
                 if(response!=null){
-                    Toast.makeText(context,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
+                   // Toast.makeText(context,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
                 }
 
             },
@@ -264,10 +268,10 @@ class ServicioRecicladorOperacionFragment : Fragment() {
                     val nr = it.networkResponse
                     val r = String(nr.data)
                     val response=  JSONObject(r)
-                    Toast.makeText(context,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
+                   // Toast.makeText(context,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
                 }catch (ex: Exception){
                     ex.printStackTrace()
-                    Toast.makeText(context,  "Error de conexión", Toast.LENGTH_SHORT).show()
+                   // Toast.makeText(context,  "Error de conexión", Toast.LENGTH_SHORT).show()
                 }
 
             }) {

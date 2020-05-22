@@ -1,60 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_gravity="center"
-    android:layout_height="wrap_content">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity"
 
-
+    >
 
     <TextView
-        android:layout_marginTop="12dp"
+        android:id="@+id/direccionglobal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="POR FAVOR ESPERE"
-        android:textSize="18sp"
-        android:textColor="@color/textBLack"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textStyle="bold"
+        android:visibility="invisible"
         />
-    <TextView
-        android:layout_marginTop="12dp"
-        android:layout_width="wrap_content"
+
+    <fragment
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:id="@+id/frg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/infoserviciomapa"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Estamos buscando el reciclador más cercano"
-        android:textSize="16sp"
-        android:textColor="@color/textBLack"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        />
-
-    <ProgressBar
-        android:layout_gravity="center"
-        android:scaleY="5"
-         android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
-        android:id="@+id/progressBar"
-        android:theme="@style/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="300dp"
-        android:indeterminate="true"
-        android:layout_height="wrap_content" />
-    <Button
-        android:layout_marginTop="12dp"
-
-        android:id="@+id/btnCancelar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CANCELAR SERVICIO"
-        android:textSize="16sp"
-        android:textColor="@color/textWhite"
-        android:background="@drawable/btn_cornerrojo"
-        android:padding="7dp"
-        android:focusable="true"
-        android:clickable="true"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        />
+        android:minHeight="150dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="8dp"
+        >
 
 
-</LinearLayout>
+        <LinearLayout
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content">
+
+
+
+            <TextView
+                android:layout_marginTop="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="POR FAVOR ESPERE"
+                android:textSize="18sp"
+                android:textColor="@color/textBLack"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_marginTop="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estamos buscando el reciclador más cercano"
+                android:textSize="16sp"
+                android:textColor="@color/textBLack"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                />
+
+            <ProgressBar
+                android:layout_gravity="center"
+                android:scaleY="5"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/progressBar"
+                android:theme="@style/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="300dp"
+                android:indeterminate="true"
+                android:layout_height="wrap_content" />
+            <Button
+                android:layout_marginTop="12dp"
+
+                android:id="@+id/btnCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CANCELAR SERVICIO"
+                android:textSize="15sp"
+                android:textColor="@color/textWhite"
+                android:background="@drawable/btn_cornerrojo"
+                android:padding="7dp"
+                android:focusable="true"
+                android:visibility="gone"
+                android:clickable="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                />
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+

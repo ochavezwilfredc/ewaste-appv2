@@ -73,13 +73,14 @@
         android:text="Seleccionar Imagen"
         android:visibility="gone"
         ></TextView>
+
+
     <ImageView
         android:id="@+id/seleccionar_imagen"
         style="?android:borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/upload"
-        android:visibility="gone"
         android:layout_gravity="center"/>
 
 

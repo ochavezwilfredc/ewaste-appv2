@@ -71,7 +71,6 @@ class ServicioProveedorEnCaminoFragment : Fragment() {
         cardViewInfo?.visibility = View.INVISIBLE
 
         val btnCancelar:Button = view.findViewById(R.id.btnCancelar)
-
         btnCancelar.setOnClickListener {
 
         }
