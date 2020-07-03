@@ -250,7 +250,7 @@ class ServicioProveedorReferenciaDialog: DialogFragment() {
                     val response=  JSONObject(r)
                     Toast.makeText(context,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
                 }catch (ex: Exception){
-                    Log.e("registro",ex.message)
+                    Log.e("registro", ex.message.toString())
                     Toast.makeText(context,  "Error de conexión", Toast.LENGTH_SHORT).show()
                 }
                 btnOperacion?.isEnabled = true

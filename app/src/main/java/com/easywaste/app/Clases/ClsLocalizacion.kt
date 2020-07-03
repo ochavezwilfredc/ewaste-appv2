@@ -165,7 +165,12 @@ class ClsLocalizacion : OnMapReadyCallback, OnRequestPermissionsResultCallback, 
                  .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
          return markerReciclador!!
      }
-
+    fun markerNormal(coor:LatLng):Marker{
+        val rec =  gmap!!.addMarker(MarkerOptions()
+            .position(coor)
+            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)))
+        return  rec
+    }
     fun activarLocalizacion(){
         activarFineLccation()
 

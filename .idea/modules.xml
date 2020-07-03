@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Ewaste.iml" filepath="$PROJECT_DIR$/Ewaste.iml" group="Ewaste" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Ewaste/app" />
-      <module fileurl="file://$PROJECT_DIR$/ewaste.iml" filepath="$PROJECT_DIR$/ewaste.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/ewaste-app.iml" filepath="$PROJECT_DIR$/app/ewaste-app.iml" />
     </modules>
   </component>
 </project>

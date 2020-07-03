@@ -49,13 +49,16 @@ class ServicioRecicladorAceptarFragment : Fragment() {
         val txtDireccion:TextView = view.findViewById(R.id.direccion)
         txtDireccion.text = servicio_direccion?.direccion
         txtTiempoEstimado = view.findViewById(R.id.tiempoestimado)
+        val btnVolver:Button = view.findViewById(R.id.btnVolver)
         val btnCancelar:Button = view.findViewById(R.id.btnCancelar)
         val btnAceptar:Button = view.findViewById(R.id.btnAceptar)
         btnAceptar.setOnClickListener {
             atenderServicio()
-
         }
         btnCancelar.setOnClickListener {
+            cancelarServicio()
+        }
+        btnVolver.setOnClickListener {
             parent!!.fragmentManager?.popBackStackImmediate()
         }
 
@@ -73,6 +76,52 @@ class ServicioRecicladorAceptarFragment : Fragment() {
         }
 
         return view
+    }
+
+    fun cancelarServicio(){
+        val activity = activity as MainActivity?
+        Toast.makeText(context,  "Espere ...", Toast.LENGTH_SHORT).show()
+        val params = HashMap<String,Any>()
+        params["id"] = SERVICIOID
+        params["parametro"] = 5
+
+        val parameters = JSONObject(params as Map<String, Any>)
+        val request : JsonObjectRequest = object : JsonObjectRequest(
+            Method.POST, VAR.url("servicio_update_estado"),parameters,
+            Response.Listener { response ->
+
+                if(response!=null){
+                    if(response.getInt("estado") == 200 ){
+                        AlertaMensaje.mostrarSuccess(activity!! ,response.getString("mensaje"))
+                    }else{
+                        AlertaMensaje.mostrarError(activity!!,response.getString("mensaje"))
+                    }
+                    activity.onBackPressed()
+                }
+
+            }, Response.ErrorListener{
+                try {
+                    if( it.networkResponse == null ||  it.networkResponse.statusCode == 203
+                        || it.networkResponse.statusCode == 500){
+                        Prefs.putServicioId(0)
+                        activity!!.cambiarFragment(ServicioProveedorRegistrarFragment())
+                        Toast.makeText(context,  "Servicio cancelado", Toast.LENGTH_SHORT).show()
+                    }
+
+                }catch (ex: Exception){
+
+                    Toast.makeText(context,  "Error de conexión", Toast.LENGTH_SHORT).show()
+                }
+
+            }) {
+            override fun getHeaders(): Map<String, String> {
+                var params: MutableMap<String, String> =HashMap()
+                params["TOKEN"] =  Prefs.pullToken()
+                return params
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(context)
+        requestQueue.add(request)
     }
 
     fun atenderServicio(){

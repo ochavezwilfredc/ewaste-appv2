@@ -137,7 +137,7 @@ class ServicioProveedorFinalizadoFragment : Fragment() {
                     Toast.makeText(context,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
                 }catch (ex: Exception){
                     ex.printStackTrace()
-                    Log.e("error",ex.message)
+                    Log.e("error", ex.message.toString())
                     Toast.makeText(context,  "Error de conexión", Toast.LENGTH_SHORT).show()
                 }
 

@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley
 import com.easywaste.app.Clases.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.PolylineOptions
+import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
 import java.util.*
@@ -202,13 +203,21 @@ class ServicioProveedorEnCaminoFragment : Fragment() {
 
                                 }
                             }
+
+                            val data = JSONArray(Prefs.pullServicioRecicladoresCercanos())
+                            for (i in 0 until data.length()){
+                                val ele = data.getJSONObject(i)
+                                if(ele.getString("elegido")=="0"){
+                                    val posicion = LatLng(ele.getDouble("lat"),ele.getDouble("lng"))
+                                    val marker = loc!!.markerNormal(posicion)
+                                }
+                            }
+
                         }
 
                         if(posicionReciclador!=null){
                             loc!!.markerReciclador?.position = LatLng(latitud,longitud)
                         }
-
-
 
                     }else{
                         Toast.makeText(context,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()

@@ -23,12 +23,13 @@ import com.easywaste.app.Clases.VAR
 import org.json.JSONObject
 import java.lang.Exception
 
+
 class ServicioRecicladorSolicitudesFragment : Fragment() {
 
-    var OK:Boolean = true
+    var OK: Boolean = true
 
     class ServicioViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-            RecyclerView.ViewHolder(inflater.inflate(R.layout.item_serviciolista, parent, false)) {
+        RecyclerView.ViewHolder(inflater.inflate(R.layout.item_serviciolista, parent, false)) {
         private var nId: TextView? = null
         private var nProveedor: TextView? = null
         private var nFecha: TextView? = null
@@ -36,14 +37,14 @@ class ServicioRecicladorSolicitudesFragment : Fragment() {
 
 
         init {
-            nId  = itemView.findViewById(R.id.id)
+            nId = itemView.findViewById(R.id.id)
             nProveedor = itemView.findViewById(R.id.proveedor)
             nFecha = itemView.findViewById(R.id.fecha)
             nHora = itemView.findViewById(R.id.hora)
 
         }
 
-        fun bind(act:MainActivity ,servicio: ClsServicio) {
+        fun bind(act: MainActivity, servicio: ClsServicio) {
             nId?.text = servicio.id.toString()
             nProveedor?.text = servicio.proveedor
             nFecha?.text = servicio.fecha
@@ -51,7 +52,7 @@ class ServicioRecicladorSolicitudesFragment : Fragment() {
             val btnAtender = itemView.findViewById<Button>(R.id.btnAtender)
             btnAtender.setOnClickListener {
                 val args = Bundle()
-                args.putInt("servicio_id",servicio.id)
+                args.putInt("servicio_id", servicio.id)
                 val frag = ServicioRecicladorOperacionFragment()
                 frag.arguments = args
                 act.cambiarFragmentBackStack(frag)
@@ -60,8 +61,8 @@ class ServicioRecicladorSolicitudesFragment : Fragment() {
 
     }
 
-    class ServicioListAdapter(val act :MainActivity, val list: List<ClsServicio>)
-        : RecyclerView.Adapter<ServicioViewHolder>() {
+    class ServicioListAdapter(val act: MainActivity, val list: List<ClsServicio>) :
+        RecyclerView.Adapter<ServicioViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServicioViewHolder {
             val inflater = LayoutInflater.from(parent.context)
@@ -69,15 +70,15 @@ class ServicioRecicladorSolicitudesFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: ServicioViewHolder, position: Int) {
-            val servicio:ClsServicio = list[position]
-            holder.bind(act,servicio)
+            val servicio: ClsServicio = list[position]
+            holder.bind(act, servicio)
         }
 
         override fun getItemCount(): Int = list.size
     }
 
     val listaServicios = ArrayList<ClsServicio>()
-    var recyclerView:RecyclerView?=null
+    var recyclerView: RecyclerView? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -92,11 +93,11 @@ class ServicioRecicladorSolicitudesFragment : Fragment() {
         val mainHandler = Handler(Looper.getMainLooper())
         mainHandler.post(object : Runnable {
             override fun run() {
-                if(OK){
+                if (OK) {
                     try {
                         listarServicios()
                         mainHandler.postDelayed(this, 4000)
-                    }catch (ex:Exception){
+                    } catch (ex: Exception) {
 
                     }
                 }
@@ -107,66 +108,68 @@ class ServicioRecicladorSolicitudesFragment : Fragment() {
         return view
     }
 
-    fun actualizarServicios(){
+    fun actualizarServicios() {
         val activity = activity as MainActivity?
 
         recyclerView?.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = ServicioListAdapter(activity!!,listaServicios)
+            adapter = ServicioListAdapter(activity!!, listaServicios)
         }
 
 
     }
 
-    fun listarServicios(){
+    fun listarServicios() {
 
         val activity = activity as MainActivity?
-       // Toast.makeText(context,  "Espere ...", Toast.LENGTH_SHORT).show()
+        // Toast.makeText(context,  "Espere ...", Toast.LENGTH_SHORT).show()
         val params = HashMap<String, Any>()
-        params["reciclador_id"] =  Prefs.pullId()
+        params["reciclador_id"] = Prefs.pullId()
 
         val parameters = JSONObject(params as Map<String, Any>)
 
-        val request : JsonObjectRequest = object : JsonObjectRequest(
-            Method.POST, VAR.url("servicio_list_prov"),parameters,
+        val request: JsonObjectRequest = object : JsonObjectRequest(
+            Method.POST, VAR.url("servicio_list_prov"), parameters,
             Response.Listener { response ->
 
-                if(response!=null){
-                    if(response.getInt("estado") == 200 ){
-                        val servicioArr =  response.getJSONArray("datos")
-                        if(servicioArr.length()>0){
+                if (response != null) {
+                    if (response.getInt("estado") == 200) {
+                        val servicioArr = response.getJSONArray("datos")
+                        if (servicioArr.length() > 0) {
                             listaServicios.clear()
                             for (i in 0 until servicioArr.length()) {
                                 val s = servicioArr.getJSONObject(i)
-                                val servicio = ClsServicio(s.getInt("id"), s.getString("proveedor"),
-                                    s.getString("fecha"), s.getString("hora"))
+                                val servicio = ClsServicio(
+                                    s.getInt("id"), s.getString("proveedor"),
+                                    s.getString("fecha"), s.getString("hora")
+                                )
                                 listaServicios.add(servicio)
                             }
                             actualizarServicios()
                         }
 
 
-                    }else{
-                   //     Toast.makeText(context,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
+                    } else {
+                        //     Toast.makeText(context,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
                     }
                 }
 
-            }, Response.ErrorListener{
+            }, Response.ErrorListener {
 
                 try {
                     val nr = it.networkResponse
                     val r = String(nr.data)
-                    val response=  JSONObject(r)
+                    val response = JSONObject(r)
                     //Toast.makeText(context,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
-                }catch (ex:Exception){
-                    Toast.makeText(context,  "Error de conexión", Toast.LENGTH_SHORT).show()
+                } catch (ex: Exception) {
+                    Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
                 }
 
 
-        }) {
+            }) {
             override fun getHeaders(): Map<String, String> {
-                var params: MutableMap<String, String> =HashMap()
-                params["TOKEN"] =  Prefs.pullToken()
+                var params: MutableMap<String, String> = HashMap()
+                params["TOKEN"] = Prefs.pullToken()
                 return params
             }
         }

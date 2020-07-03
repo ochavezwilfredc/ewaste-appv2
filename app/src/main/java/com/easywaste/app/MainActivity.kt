@@ -304,7 +304,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         actualizarEstadoReciclador(parent)
                         Toast.makeText(applicationContext,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
                     }catch (ex: Exception){
-                        Log.e("error", ex.message)
+                        Log.e("error", ex.message.toString())
                         ex.printStackTrace()
                         Toast.makeText(applicationContext,  "Error de conexión", Toast.LENGTH_SHORT).show()
                     }
