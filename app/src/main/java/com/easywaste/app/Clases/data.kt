@@ -9,6 +9,7 @@ import com.andreacioccarelli.cryptoprefs.CryptoPrefs
 import com.easywaste.app.R
 import com.google.android.gms.maps.model.LatLng
 import com.tapadoo.alerter.Alerter
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -47,6 +48,12 @@ data class ClsUsuarioResumen(
      }
 
  }
+
+class ClsAlmacen(val id: Int, val code:String, val centro:String, val sector:String, val peso:String,val detalle:List<ClsAlmacenDetalle>) {
+
+}
+class ClsAlmacenDetalle(val id: Int, val residuo_id:Int, val nombre:String, val cantidad:String) {
+}
 data class ClsServicioDireccion(val direccion: String, val posicion:LatLng) {
 }
 

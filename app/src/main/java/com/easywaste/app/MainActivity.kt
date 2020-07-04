@@ -135,6 +135,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         }else if(rolid==2){
             //RECICLADOR
+            menu.findItem(R.id.nav_solicitud).setVisible(true)
+            menu.findItem(R.id.nav_almacen).setVisible(true)
+
             val estadoReciclador : NiceSpinner = headerView.findViewById(R.id.estado_reciclador)
             estadoReciclador.visibility = View.VISIBLE
             val dataset = listOf("Disponible", "No Disponible", "Ocupado")
@@ -434,6 +437,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     val frag = ServicioProveedorEspereFragment()
                     cambiarFragment(frag)
                 }
+            }
+            R.id.nav_almacen -> {
+                val frag = ServicioRecicladorAlmacenesFragment()
+                cambiarFragment(frag)
+            }
+            R.id.nav_solicitud -> {
+                val frag = ServicioRecicladorSolicitudesFragment()
+                cambiarFragment(frag)
             }
             R.id.nav_logout  -> {
                 Prefs.destroy()

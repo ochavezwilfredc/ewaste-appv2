@@ -20,6 +20,9 @@
     <string name="menu_delivery">Realizar pedido</string>
     <string name="menu_datos">Datos Personales</string>
     <string name="menu_servicio">Solicitar Servicio</string>
+    <string name="menu_solicitudes">Solicitudes</string>
+    <string name="menu_almacenes">Almacenes</string>
+
     <string name="menu_logout">Cerrar Sesión</string>
 
     <string name="api_google">AIzaSyBPWU8VYU8QC_oFQUV6QjPN4N6re340V0s</string>

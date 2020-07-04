@@ -18,6 +18,17 @@
             android:title="@string/menu_servicio"/>
 
         <item
+            android:id="@+id/nav_solicitud"
+            android:icon="@drawable/service"
+            android:visible="false"
+            android:title="@string/menu_solicitudes"/>
+        <item
+            android:id="@+id/nav_almacen"
+            android:icon="@drawable/almacen"
+            android:visible="false"
+            android:title="@string/menu_almacenes"/>
+
+        <item
             android:id="@+id/nav_informacion"
             android:icon="@drawable/info"
             android:visible="true"
