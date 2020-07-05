@@ -33,6 +33,8 @@ class ServicioRecicladorAlmacenesFragment : Fragment() {
         private var nCentro: TextView? = null
         private var nSector: TextView? = null
         private var nPeso: TextView? = null
+        private var nFecha: TextView? = null
+
         private var recyclerView:RecyclerView?=null
 
         var listadetalle = ArrayList<ClsAlmacenDetalle>()
@@ -44,6 +46,7 @@ class ServicioRecicladorAlmacenesFragment : Fragment() {
             nCentro = itemView.findViewById(R.id.centro)
             nSector = itemView.findViewById(R.id.sector)
             nPeso = itemView.findViewById(R.id.peso)
+            nFecha = itemView.findViewById(R.id.fecha)
 
         }
 
@@ -65,6 +68,8 @@ class ServicioRecicladorAlmacenesFragment : Fragment() {
             nCode?.text = almacen.code
             nSector?.text = almacen.sector
             nCentro?.text = almacen.centro
+            nFecha?.text = almacen.fecha
+
             nPeso?.text = almacen.peso.toString()
 
             val btnVer = itemView.findViewById<Button>(R.id.btnVer)
@@ -219,6 +224,7 @@ class ServicioRecicladorAlmacenesFragment : Fragment() {
                                     s.getInt("id"), s.getString("code"),
                                     s.getString("centro_acopio"),
                                     s.getString("sector"), s.getString("total_peso"),
+                                    s.getString("fecha_registro"),
                                     detalles
                                 )
                                 listaAlmacenes.add(almacen)

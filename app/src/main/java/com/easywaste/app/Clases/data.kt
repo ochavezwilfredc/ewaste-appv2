@@ -49,7 +49,8 @@ data class ClsUsuarioResumen(
 
  }
 
-class ClsAlmacen(val id: Int, val code:String, val centro:String, val sector:String, val peso:String,val detalle:List<ClsAlmacenDetalle>) {
+class ClsAlmacen(val id: Int, val code:String, val centro:String, val sector:String, val peso:String,val fecha:String,
+                 val detalle:List<ClsAlmacenDetalle>) {
 
 }
 class ClsAlmacenDetalle(val id: Int, val residuo_id:Int, val nombre:String, val cantidad:String) {

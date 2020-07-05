@@ -22,7 +22,7 @@
             android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="89dp"
+            android:layout_height="108dp"
             android:orientation="horizontal" >
 
             <LinearLayout
@@ -111,6 +111,31 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="sector"
+                        android:textSize="13sp"
+                        android:textColor="@color/textBLack" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal" android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:layout_marginRight="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha:"
+                        android:textSize="13sp"
+                        android:textColor="@color/textBLack"
+                        android:textStyle="bold"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/fecha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="fecha"
                         android:textSize="13sp"
                         android:textColor="@color/textBLack" />
                 </LinearLayout>
