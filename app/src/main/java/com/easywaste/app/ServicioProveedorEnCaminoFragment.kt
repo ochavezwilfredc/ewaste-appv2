@@ -23,11 +23,13 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.easywaste.app.Clases.*
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.PolylineOptions
 import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.concurrent.schedule
 
@@ -47,6 +49,8 @@ class ServicioProveedorEnCaminoFragment : Fragment() {
     var posicionReciclador:LatLng?= null
     var requestQueue:RequestQueue? =null
     var txtLLego:TextView? = null
+    var listaRecicladores=ArrayList<Marker>()
+    var isCleared = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -61,7 +65,6 @@ class ServicioProveedorEnCaminoFragment : Fragment() {
         mapFragment.getMapAsync(loc)
 
 
-        loc!!.gmap?.clear()
         requestQueue = Volley.newRequestQueue(activity!!.applicationContext)
 
         txtReciclador = view.findViewById(R.id.reciclador)
@@ -122,7 +125,7 @@ class ServicioProveedorEnCaminoFragment : Fragment() {
                         if (estado == "En Camino"){
                             if(posicionProveedor==null){
                                 posicionProveedor = LatLng(latitud,longitud)
-                                ClsLocalizacion.lastLatLong = posicionProveedor
+                                // ClsLocalizacion.lastLatLong = posicionProveedor
                             }
                             txtRecicladorDni?.text =reciclador_dni
                             txtReciclador?.text = reciclador
@@ -192,26 +195,41 @@ class ServicioProveedorEnCaminoFragment : Fragment() {
                         if(posicionReciclador==null && posicionProveedor!=null){
                             posicionReciclador = LatLng(latitud,longitud)
                             loc!!.gmap?.clear()
-                            val markerproveedor = loc!!.markerProveedor(posicionProveedor!!)
-                            loc!!.agregarMarcador(markerproveedor)
-                            val markerpreciclador = loc!!.markerReciclador(posicionReciclador!!)
-                            loc!!.agregarMarcador(markerpreciclador)
-                            Timer().schedule(6000) {
-                                try {
-                                    dibujarRuta(posicionReciclador!!,posicionProveedor!!,null)
-                                }catch (ex:Exception){
 
+                            try {
+                                val markerproveedor = loc!!.markerProveedor(posicionProveedor!!)
+                                loc!!.agregarMarcador(markerproveedor)
+                                val markerpreciclador = loc!!.markerReciclador(posicionReciclador!!)
+                                loc!!.agregarMarcador(markerpreciclador)
+                                Timer().schedule(6000) {
+                                    try {
+                                        dibujarRuta(posicionReciclador!!,posicionProveedor!!,null)
+                                    }catch (ex:Exception){
+
+                                    }
                                 }
+
+                                val data = JSONArray(Prefs.pullServicioRecicladoresCercanos())
+                                val nameReciclador = ""
+                                for (i in 0 until data.length()){
+                                    val ele = data.getJSONObject(i)
+                                    if(ele.getString("elegido")=="0"){
+                                        //val posicion = LatLng(ele.getDouble("lat"),ele.getDouble("lng"))
+                                        //val marker = loc!!.markerNormal(posicion)
+                                        //listaRecicladores.add(marker)
+                                        //marker.title =  ele.getString("reciclador_name")
+                                    }else{
+                                        markerpreciclador.title =  ele.getString("reciclador_name")
+                                        markerpreciclador.showInfoWindow()
+                                    }
+                                }
+                            }catch (ex:Exception){
+
+
                             }
 
-                            val data = JSONArray(Prefs.pullServicioRecicladoresCercanos())
-                            for (i in 0 until data.length()){
-                                val ele = data.getJSONObject(i)
-                                if(ele.getString("elegido")=="0"){
-                                    val posicion = LatLng(ele.getDouble("lat"),ele.getDouble("lng"))
-                                    val marker = loc!!.markerNormal(posicion)
-                                }
-                            }
+
+
 
                         }
 

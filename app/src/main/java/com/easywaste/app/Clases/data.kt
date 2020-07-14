@@ -1,7 +1,9 @@
 package com.easywaste.app.Clases
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import android.util.Patterns
 import android.widget.EditText
@@ -236,7 +238,7 @@ class AlertaMensaje {
 
 class Prefs {
     companion object {
-        var instance: CryptoPrefs? = null
+        var instance: SharedPreferences? = null
         val PASS = "pass"
         val PERSONA = "persona"
         val DNI = "dni"
@@ -250,125 +252,124 @@ class Prefs {
         val SERVICIORECICLADORID = "serviciorecicladorid"
         val RECICLADOR_ESTADO = "reciclador_estado"
         val TOKEN = "token"
-
         val posiciones_recicladores = "posicionesrecicladores"
         fun getInstance(context: Context, change: Boolean = false) {
             if (change || instance == null) {
-                instance = CryptoPrefs(context, "easywaste", "EasyWaste!=?")
+                instance = context.getSharedPreferences("easywaste", 0)
             }
         }
         fun putId(id: Int) {
             if (instance != null) {
-                instance?.put(ID, id)
+                instance?.edit()?.putInt(ID, id)?.apply()
             }
         }
         fun pullId(): Int {
             if (instance != null) {
-                return instance?.get(ID, "0")!!.toInt()
+                return instance?.getInt(ID, 0)!!
             }
             return 0
         }
         fun putServicioId(id: Int) {
             if (instance != null) {
-                instance?.put(SERVICIOID, id)
+                instance?.edit()?.putInt(SERVICIOID, id)?.apply()
             }
         }
 
         fun putServicioRecicladoresCercanos(str: String) {
             if (instance != null) {
-                instance?.put(posiciones_recicladores, str)
+                instance?.edit()?.putString(posiciones_recicladores, str)?.apply()
             }
         }
         fun pullServicioRecicladoresCercanos(): String {
             if (instance != null) {
-                return instance?.get(posiciones_recicladores, "")!!
+                return instance?.getString(posiciones_recicladores, "")!!
             }
             return ""
         }
         fun pullServicioId(): Int {
             if (instance != null) {
-                return instance?.get(SERVICIOID, "0")!!.toInt()
+                return instance?.getInt(SERVICIOID, 0)!!
             }
             return 0
         }
         fun putServicioRecicladorId(id: Int) {
             if (instance != null) {
-                instance?.put(SERVICIORECICLADORID, id)
+                instance?.edit()?.putInt( SERVICIORECICLADORID, id)?.apply()
             }
         }
         fun pullServicioRecicladorId(): Int {
             if (instance != null) {
-                return instance?.get(SERVICIORECICLADORID, "0")!!.toInt()
+                return instance?.getInt(SERVICIORECICLADORID, 0)!!
             }
             return 0
         }
         fun putDNI(dni: String) {
             if (instance != null) {
-                instance?.put(DNI, dni)
+                instance?.edit()?.putString(DNI, dni)?.apply()
             }
         }
         fun putRolId(rolid: Int) {
             if (instance != null) {
-                instance?.put(ROL_ID, rolid)
+                instance?.edit()?.putInt(ROL_ID, rolid)?.apply()
             }
         }
         fun pullDNI(): String {
             if (instance != null) {
-                return instance?.get(DNI, "")!!
+                return instance?.getString(DNI, "")!!
             }
             return ""
         }
         fun pullRolId(): Int {
             if (instance != null) {
-                    return instance?.get(ROL_ID, "0")!!.toInt()
+                    return instance?.getInt(ROL_ID, 0)!!
             }
             return 0
         }
         fun putPass(pass: String) {
             if (instance != null) {
-                instance?.put(PASS, pass)
+                instance?.edit()?.putString(PASS, pass)?.apply()
             }
         }
 
         fun pullPass(): String {
             if (instance != null) {
-                return instance?.get(PASS, "")!!
+                return instance?.getString(PASS, "")!!
             }
             return ""
         }
         fun putToken(pass: String) {
             if (instance != null) {
-                instance?.put(TOKEN, pass)
+                instance?.edit()?.putString(TOKEN, pass)?.apply()
             }
         }
 
         fun pullToken(): String {
             if (instance != null) {
-                return instance?.get(TOKEN, "")!!
+                return instance?.getString(TOKEN, "")!!
             }
             return ""
         }
         fun putString(tipo: String, s: String) {
             if (instance != null) {
-                instance?.put(tipo, s)
+                instance?.edit()?.putString(tipo, s)?.apply()
             }
         }
 
         fun pullString(tipo: String): String {
             if (instance != null) {
-                return instance?.get(tipo, "")!!
+                return instance?.getString(tipo, "")!!
             }
             return ""
         }
         fun putInt(tipo: String, s: Int) {
             if (instance != null) {
-                instance?.put(tipo, s)
+                instance?.edit()?.putInt(tipo, s)?.apply()
             }
         }
 
         fun pullInt(tipo: String): Int {
             if (instance != null) {
-                return instance?.get(tipo, "0")!!.toInt()
+                return instance?.getInt(tipo, 0)!!
             }
             return 0
         }
@@ -382,7 +383,7 @@ class Prefs {
         }
         fun isLogin():Boolean{
             if (instance != null) {
-                val l =instance?.get(LOGIN,"")
+                val l =instance?.getString(LOGIN,"")
                 if (l == "1"){
                     return true
                 }
@@ -392,7 +393,7 @@ class Prefs {
 
         fun destroy(){
             if (instance != null) {
-                instance?.put(LOGIN, "")
+                instance?.edit()?.putString(LOGIN, "")?.apply()
             }
         }
 

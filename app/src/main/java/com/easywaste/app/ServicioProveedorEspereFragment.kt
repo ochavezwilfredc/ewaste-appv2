@@ -105,11 +105,17 @@ class ServicioProveedorEspereFragment : Fragment() {
                             val reciclado = Prefs.pullServicioRecicladoresCercanos()
                             if(reciclado !=""){
                                 val data = JSONArray(Prefs.pullServicioRecicladoresCercanos())
+
+
                                 for (i in 0 until data.length()){
                                     val ele = data.getJSONObject(i)
-                                    val posicionReciclador = LatLng(ele.getDouble("lat"),ele.getDouble("lng"))
-                                    val markerpreciclador = loc!!.markerReciclador(posicionReciclador)
-                                    loc!!.agregarMarcador(markerpreciclador)
+                                    val posicion = LatLng(ele.getDouble("lat"),ele.getDouble("lng"))
+                                    val marker = loc!!.markerNormal(posicion)
+                                    marker.title =  ele.getString("reciclador_name")
+                                    //val posicionReciclador = LatLng(ele.getDouble("lat"),ele.getDouble("lng"))
+                                    //val markerpreciclador = loc!!.markerReciclador(posicionReciclador)
+                                    //loc!!.agregarMarcador(markerpreciclador)
+//v
                                 }
                             }
 
@@ -138,8 +144,13 @@ class ServicioProveedorEspereFragment : Fragment() {
                     if(Prefs.pullServicioId() == 0 ){
                         OK = false
                         btnCancelarServicio?.visibility = View.GONE
-                        Toast.makeText(context,  "Servicio finalizado.", Toast.LENGTH_SHORT).show()
-                        mainActivity?.cambiarFragment(ServicioProveedorRegistrarFragment())
+                        try {
+
+                        }catch (ex:Exception){
+                            Toast.makeText(requireActivity(),  "Servicio finalizado.", Toast.LENGTH_SHORT).show()
+                            mainActivity?.cambiarFragment(ServicioProveedorRegistrarFragment())
+                        }
+
                     }
                 }
 

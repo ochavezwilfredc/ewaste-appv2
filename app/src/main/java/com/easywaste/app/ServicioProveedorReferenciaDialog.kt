@@ -213,9 +213,9 @@ class ServicioProveedorReferenciaDialog: DialogFragment() {
             Response.Listener { response ->
 
                 if(response!=null){
+                    Log.e("error", response.toString())
                     if(response.getInt("estado") == 200 ){
                         AlertaMensaje.mostrarSuccess(activity!! ,response.getString("mensaje"))
-                        Log.e("error", response.toString())
                         val datos =  response.getJSONArray("datos")
                         if(datos.length()>0){
                             var cont = 0

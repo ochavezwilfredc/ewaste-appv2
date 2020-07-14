@@ -82,12 +82,12 @@ class ServicioRecicladorAceptarFragment : Fragment() {
         val activity = activity as MainActivity?
         Toast.makeText(context,  "Espere ...", Toast.LENGTH_SHORT).show()
         val params = HashMap<String,Any>()
-        params["id"] = SERVICIOID
-        params["parametro"] = 5
+        params["servicio_id"] = SERVICIOID
+        params["reciclador_id"] = Prefs.pullId()
 
         val parameters = JSONObject(params as Map<String, Any>)
         val request : JsonObjectRequest = object : JsonObjectRequest(
-            Method.POST, VAR.url("servicio_update_estado"),parameters,
+            Method.POST, VAR.url("servicio_cancel"),parameters,
             Response.Listener { response ->
 
                 if(response!=null){
@@ -104,7 +104,7 @@ class ServicioRecicladorAceptarFragment : Fragment() {
                     if( it.networkResponse == null ||  it.networkResponse.statusCode == 203
                         || it.networkResponse.statusCode == 500){
                         Prefs.putServicioId(0)
-                        activity!!.cambiarFragment(ServicioProveedorRegistrarFragment())
+                        activity!!.cambiarFragment(ServicioRecicladorSolicitudesFragment())
                         Toast.makeText(context,  "Servicio cancelado", Toast.LENGTH_SHORT).show()
                     }
 

@@ -44,8 +44,8 @@ class ClsLocalizacion : OnMapReadyCallback, OnRequestPermissionsResultCallback, 
     val DEFAULT_ZOOM = 17f
     var locationClient:FusedLocationProviderClient?= null
     var activity:AppCompatActivity? = null
-     var defaultClick:Boolean = true
-     var markers = ArrayList<Marker>()
+    var defaultClick:Boolean = true
+    var markers = ArrayList<Marker>()
     var clickMarker:Boolean = false
     var markerProveedor:Marker?=null
     var markerReciclador:Marker?=null
@@ -84,11 +84,8 @@ class ClsLocalizacion : OnMapReadyCallback, OnRequestPermissionsResultCallback, 
 
          if(lastLatLong!=null){
              gmap!!.clear()
-             gmap!!.addMarker( MarkerOptions()
-                 .position(lastLatLong!!))
-             gmap!!.moveCamera(
-                 CameraUpdateFactory.newLatLngZoom(lastLatLong, DEFAULT_ZOOM))
-
+            // gmap!!.addMarker( MarkerOptions().position(lastLatLong!!))
+             gmap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(lastLatLong, DEFAULT_ZOOM))
          }
 
 
@@ -135,7 +132,10 @@ class ClsLocalizacion : OnMapReadyCallback, OnRequestPermissionsResultCallback, 
 
 
                         if(Prefs.pullRolId() == 3){
-                            markers.add(markerProveedor(latlong))
+                            if(markerProveedor==null){
+                                markerProveedor = markerProveedor(latlong)
+                                markers.add(markerProveedor!!)
+                            }
                             gmap!!.moveCamera(
                                     CameraUpdateFactory.newLatLngZoom(latlong, DEFAULT_ZOOM))
                         }else if (Prefs.pullRolId() == 2){
