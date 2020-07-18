@@ -145,6 +145,9 @@ class RegistrarFragment : Fragment(){
 
         btnRegistrar?.isEnabled = false
         Toast.makeText(activity,  "Espere ...", Toast.LENGTH_SHORT).show()
+
+        Log.e("registrarProveedor",parameters.toString())
+
         val request = JsonObjectRequest(
             Request.Method.POST, VAR.url("proveedor_create"), parameters,
             Response.Listener { response ->
@@ -202,7 +205,7 @@ class RegistrarFragment : Fragment(){
 
     fun buscarZonas(){
             val request : JsonObjectRequest = object : JsonObjectRequest(
-                Method.POST, VAR.url("zonas_list"),null,
+                Method.GET, VAR.url("zonas_list"),null,
                 Response.Listener { response ->
 
                     if(response!=null){
@@ -216,33 +219,34 @@ class RegistrarFragment : Fragment(){
                                 }
                             }
                             procesarZonas()
-
-
                         }catch (ex:Exception){
+                            Log.e("buscarZonasyES", ex.message.toString())
                             listaZonas.clear()
                         }
                     }
 
                 },
                 Response.ErrorListener{
+                    buscarZonas()
+                    Log.e("buscarZonasError", it.localizedMessage)
                     try {
                         val nr = it.networkResponse
                         val r = String(nr.data)
                         val response=  JSONObject(r)
                         Toast.makeText(activity,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
                     }catch (ex: Exception){
-                        Toast.makeText(activity,  "Error de conexión", Toast.LENGTH_SHORT).show()
+                        //   Toast.makeText(activity,  "Error de conexión", Toast.LENGTH_SHORT).show()
                     }
 
                 }) {
                 override fun getHeaders(): Map<String, String> {
                     var params: MutableMap<String, String> =HashMap()
-                    params["TOKEN"] =  Prefs.pullToken()
+                    //params["TOKEN"] =  Prefs.pullToken()
                     return params
                 }
             }
 
-            val requestQueue = Volley.newRequestQueue(activity)
+            val requestQueue = Volley.newRequestQueue(requireActivity())
             requestQueue.add(request)
     }
 

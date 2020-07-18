@@ -51,6 +51,7 @@ class ServicioProveedorEnCaminoFragment : Fragment() {
     var txtLLego:TextView? = null
     var listaRecicladores=ArrayList<Marker>()
     var isCleared = false
+    var nombreReciclador = ""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -116,6 +117,7 @@ class ServicioProveedorEnCaminoFragment : Fragment() {
                         val longitud = datos.getDouble("longitud")
                         val estado = datos.getString("estado")
                         val reciclador = datos.getString("reciclador")
+                        nombreReciclador = reciclador
                         val reciclador_dni = datos.getString("reciclador_dni")
                         val tiempo_aproximado = datos.getInt("tiempo_aprox_atencion")
                         SERVICIO = ClsServicio(Prefs.pullServicioId(), proveedor)
@@ -219,7 +221,7 @@ class ServicioProveedorEnCaminoFragment : Fragment() {
                                         //listaRecicladores.add(marker)
                                         //marker.title =  ele.getString("reciclador_name")
                                     }else{
-                                        markerpreciclador.title =  ele.getString("reciclador_name")
+                                        markerpreciclador.title =  nombreReciclador
                                         markerpreciclador.showInfoWindow()
                                     }
                                 }

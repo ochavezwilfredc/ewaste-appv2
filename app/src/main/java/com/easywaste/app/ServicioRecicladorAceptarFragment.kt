@@ -89,7 +89,6 @@ class ServicioRecicladorAceptarFragment : Fragment() {
         val request : JsonObjectRequest = object : JsonObjectRequest(
             Method.POST, VAR.url("servicio_cancel"),parameters,
             Response.Listener { response ->
-
                 if(response!=null){
                     if(response.getInt("estado") == 200 ){
                         AlertaMensaje.mostrarSuccess(activity!! ,response.getString("mensaje"))
