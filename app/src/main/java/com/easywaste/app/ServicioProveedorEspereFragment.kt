@@ -183,8 +183,9 @@ class ServicioProveedorEspereFragment : Fragment() {
         val activity = activity as MainActivity?
         Toast.makeText(context,  "Espere ...", Toast.LENGTH_SHORT).show()
         val params = HashMap<String,Any>()
-        params["id"] = Prefs.pullServicioId()
+        params["servicio_id"] = Prefs.pullServicioId()
         params["parametro"] = 5
+        params["reciclador_id"] = Prefs.pullId()
 
         val parameters = JSONObject(params as Map<String, Any>)
         val request : JsonObjectRequest = object : JsonObjectRequest(

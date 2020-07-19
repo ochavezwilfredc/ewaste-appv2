@@ -63,6 +63,15 @@ class ServicioRecicladorOperacionFragment : Fragment() {
         cardViewInfo = view.findViewById(R.id.infoserviciomapa)
         cardViewInfo?.visibility = View.INVISIBLE
         buscarServicioRecicladorEstado()
+
+        val locationManager: LocationManager? = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
+        try {
+            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, TIEMPO_ACTUALIZAR_POSICION_RECICLADOR, 0f, locationListener)
+        } catch(ex: SecurityException) {
+
+        }
+
+
         return view
     }
 
@@ -128,14 +137,6 @@ class ServicioRecicladorOperacionFragment : Fragment() {
 
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(request)
-
-         val locationManager: LocationManager? = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
-         try {
-             // Request location updates
-             locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, TIEMPO_ACTUALIZAR_POSICION_RECICLADOR, 0f, locationListener)
-         } catch(ex: SecurityException) {
-
-         }
     }
 
     fun urlMapsApi(origin:LatLng, dest:LatLng):String{
@@ -157,12 +158,8 @@ class ServicioRecicladorOperacionFragment : Fragment() {
 
 
     fun buscarServicioRecicladorEstado(){
-        var idservicio = 0
-        if(Prefs.pullServicioRecicladorId() !=0){
-            idservicio = Prefs.pullServicioRecicladorId()
-        }else{
-            idservicio = SERVICIOID
-        }
+        var idservicio = SERVICIOID
+
         val params = HashMap<String,Any>()
         params["servicio_id"] =  idservicio
         val parameters = JSONObject(params as Map<String, Any>)

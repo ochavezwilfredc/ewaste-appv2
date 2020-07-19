@@ -149,7 +149,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             if(estado_reciclador<1){ estado_reciclador = 1 }
             estadoReciclador.selectedIndex = estado_reciclador - 1
             actualizarEstadoReciclador(estadoReciclador)
-
             if(Prefs.pullServicioRecicladorId() !=0){
                 val frag = ServicioRecicladorOperacionFragment()
                 cambiarFragment(frag)
@@ -157,6 +156,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val frag = ServicioRecicladorSolicitudesFragment()
                 cambiarFragment(frag)
             }
+
+
             OK = true
 
             val locManager:LocationManager? = getSystemService(Context.LOCATION_SERVICE) as LocationManager?
@@ -371,13 +372,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun actualizarPosicionReciclador(){
 
-
         val params = HashMap<String,Any>()
         params["reciclador_id"] =  Prefs.pullId()
         params["latitud"] =  ClsLocalizacion.lastLatLong!!.latitude
         params["longitud"] =  ClsLocalizacion.lastLatLong!!.longitude
 
-        Log.e("error", params.toString())
         val parameters = JSONObject(params as Map<String, Any>)
 
         val request : JsonObjectRequest = object : JsonObjectRequest(
@@ -385,7 +384,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Response.Listener { response ->
 
                 if(response!=null){
-                    Log.e("error", response.getString("mensaje"))
                   //  Toast.makeText(this,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
                 }
             },
@@ -499,13 +497,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         super.onActivityResult(requestCode, resultCode, data)
-         Log.e("error", "mostrando data 2")
 
          when(requestCode) {
 
             ServicioProveedorRegistrarFragment.RETORNA_IMAGEN -> {
                 if (resultCode == 1) {
-                    Log.e("error", "mostrando data 1")
                     /*
                     if( ServicioProveedorRegistrarFragment.fragReferenciaDialog!=null){
                         Log.e("error", "mostrando data 2")

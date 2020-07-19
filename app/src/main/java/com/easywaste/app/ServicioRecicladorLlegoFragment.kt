@@ -71,7 +71,10 @@ class ServicioRecicladorLlegoFragment : Fragment() {
 
             val params = HashMap<String,Any>()
             params["parametro"] =  3
-            params["id"] =  Prefs.pullServicioRecicladorId()
+            params["servicio_id"] = Prefs.pullServicioRecicladorId()
+            params["reciclador_id"] = Prefs.pullId()
+
+            Log.d("llegoReciclador", params.toString())
 
             val parameters = JSONObject(params as Map<String, Any>)
             val request : JsonObjectRequest = object : JsonObjectRequest(
@@ -97,7 +100,8 @@ class ServicioRecicladorLlegoFragment : Fragment() {
                         val response=  JSONObject(r)
                         Toast.makeText(context,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
                     }catch (ex: Exception){
-                        Toast.makeText(context,  "Error de conexión", Toast.LENGTH_SHORT).show()
+                        ex.printStackTrace()
+                        //  Toast.makeText(context,  "Error de conexión", Toast.LENGTH_SHORT).show()
                     }
 
                 }) {
@@ -185,10 +189,10 @@ class ServicioRecicladorLlegoFragment : Fragment() {
     }
     fun confirmarServicio(){
         val mainActivity:MainActivity = activity as MainActivity
-
         val params = HashMap<String,Any>()
         params["parametro"] =  4
-        params["id"] =  Prefs.pullServicioRecicladorId()
+        params["servicio_id"] = Prefs.pullServicioRecicladorId()
+        params["reciclador_id"] = Prefs.pullId()
 
         val parameters = JSONObject(params as Map<String, Any>)
         val request : JsonObjectRequest = object : JsonObjectRequest(
@@ -198,7 +202,6 @@ class ServicioRecicladorLlegoFragment : Fragment() {
                 if(response!=null){
                     if(response.getInt("estado") == 200 ){
                         Prefs.putServicioRecicladorId(0)
-
                         AlertaMensaje.mostrarSuccess(activity!!,response.getString("mensaje"))
                         val frag = ServicioRecicladorSolicitudesFragment()
                         mainActivity.cambiarFragment(frag)
@@ -238,8 +241,9 @@ class ServicioRecicladorLlegoFragment : Fragment() {
         val mainActivity:MainActivity = activity as MainActivity
 
         val params = HashMap<String,Any>()
-        params["parametro"] =  5
-        params["id"] =  Prefs.pullServicioRecicladorId()
+        params["parametro"] = 5
+        params["servicio_id"] =  Prefs.pullServicioRecicladorId()
+        params["reciclador_id"] = Prefs.pullId()
 
         val parameters = JSONObject(params as Map<String, Any>)
         val request : JsonObjectRequest = object : JsonObjectRequest(
