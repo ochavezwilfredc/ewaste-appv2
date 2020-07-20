@@ -119,8 +119,11 @@ class LoginRecicladorFragment : Fragment(){
                         AlertaMensaje.mostrarSuccess(activity!! ,response.getString("mensaje"))
                         Prefs.putString(Prefs.USUARIOLOGIN, codigo)
                         Prefs.putRolId(2)
-                        leerDatosPersona(response.getJSONObject("datos"))
+                        val datos = response.getJSONObject("datos")
+                        leerDatosPersona(datos)
                         btnIngresar?.isEnabled = true
+                        Prefs.putId(datos.getInt("id"))
+
                         if(cbGuardar!!.isChecked ){
                             Prefs.putPass(pass)
                         }

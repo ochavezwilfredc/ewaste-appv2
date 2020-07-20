@@ -104,7 +104,6 @@ class ServicioProveedorFinalizadoFragment : Fragment() {
 
     fun finalizarServicio(){
 
-
         val params = HashMap<String,Any>()
         params["servicio_id"] =  Prefs.pullServicioId()
         params["calificacion"] =  barraPuntaje?.rating!!.toInt()

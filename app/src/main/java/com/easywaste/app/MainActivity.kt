@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     var  drawerLayout: DrawerLayout? = null
     var cantPintrash:TextView?=null
     var OK = false
+    var estadoReciclador:NiceSpinner? = null
     @SuppressLint("MissingPermission")
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
@@ -138,17 +139,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             menu.findItem(R.id.nav_solicitud).setVisible(true)
             menu.findItem(R.id.nav_almacen).setVisible(true)
 
-            val estadoReciclador : NiceSpinner = headerView.findViewById(R.id.estado_reciclador)
-            estadoReciclador.visibility = View.VISIBLE
+            estadoReciclador = headerView.findViewById(R.id.estado_reciclador)
+            estadoReciclador?.visibility = View.VISIBLE
             val dataset = listOf("Disponible", "No Disponible", "Ocupado")
-            estadoReciclador.attachDataSource(dataset)
-            estadoReciclador.setOnSpinnerItemSelectedListener { parent, view, position, id ->
-                actualizarEstadoReciclador(parent,true)
+            estadoReciclador?.attachDataSource(dataset)
+            estadoReciclador?.setOnSpinnerItemSelectedListener { parent, view, position, id ->
+                actualizarEstadoReciclador(true)
             }
-            var estado_reciclador = Prefs.pullInt(Prefs.RECICLADOR_ESTADO)
-            if(estado_reciclador<1){ estado_reciclador = 1 }
-            estadoReciclador.selectedIndex = estado_reciclador - 1
-            actualizarEstadoReciclador(estadoReciclador)
+            var estado = Prefs.pullInt(Prefs.RECICLADOR_ESTADO)
+            if(estado<1){ estado = 1 }
+            estadoReciclador?.selectedIndex = estado - 1
+            updateStatusReciclador(estado)
             if(Prefs.pullServicioRecicladorId() !=0){
                 val frag = ServicioRecicladorOperacionFragment()
                 cambiarFragment(frag)
@@ -198,23 +199,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
     fun buscarPintrash(){
         //  cantPintrash?.visibility = View.INVISIBLE
-        val params = HashMap<String,Any>()
-        params["proveedor_id"] =  Prefs.pullId()
-        val parameters = JSONObject(params as Map<String, Any>)
+        val params =  JSONObject()
+        params.put("proveedor_id", Prefs.pullId())
 
         val request : JsonObjectRequest = object : JsonObjectRequest(
-            Method.POST, VAR.url("proveedor_pintrash"),parameters,
+            Method.POST, VAR.url("proveedor_pintrash"),params,
             Response.Listener { response ->
 
                 if(response!=null){
 
                     try {
                         cantPintrash?.visibility = View.VISIBLE
-
                         if(response.getInt("estado") == 200){
-
                             cantPintrash?.setText( response.getInt("datos").toString()+ " pintrash")
-
                         }else{
                             cantPintrash?.setText("0 pintrash")
 
@@ -237,7 +234,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     Toast.makeText(this,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
                 }catch (ex: Exception){
                     ex.printStackTrace()
-                    Toast.makeText(this,  "Error de conexión", Toast.LENGTH_SHORT).show()
+                 //   Toast.makeText(this,  "Error de conexión", Toast.LENGTH_SHORT).show()
                 }
 
             }) {
@@ -252,79 +249,79 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         requestQueue.add(request)
     }
 
-    fun actualizarEstadoReciclador(parent: NiceSpinner, update:Boolean = false){
-        val  item = parent.getItemAtPosition( parent.selectedIndex)
-        parent.setTextColor(resources.getColor(R.color.textWhite))
+    fun actualizarEstadoReciclador(update:Boolean = false){
+        val  item = estadoReciclador?.getItemAtPosition( estadoReciclador!!.selectedIndex)
+        estadoReciclador?.setTextColor(resources.getColor(R.color.textWhite))
         var estado:Int= 0
         when(item) {
             "Disponible" -> {
-                parent.setBackgroundColor(resources.getColor(R.color.primaryColor))
+                estadoReciclador?.setBackgroundColor(resources.getColor(R.color.primaryColor))
                 estado = 1
             }
             "No Disponible" ->{
-                parent.setBackgroundColor(resources.getColor(R.color.colorRed))
+                estadoReciclador?.setBackgroundColor(resources.getColor(R.color.colorRed))
                 estado = 2
             }
             "Ocupado" -> {
-                parent.setBackgroundColor(resources.getColor(R.color.colorOrange))
+                estadoReciclador?.setBackgroundColor(resources.getColor(R.color.colorOrange))
                 estado = 3
             }
-
         }
         if(update){
-            val params = HashMap<String,Any>()
-            params["id"] =  Prefs.pullId()
-            params["status"] = estado
-
-            val parameters = JSONObject(params as Map<String, Any>)
-
-            val request : JsonObjectRequest = object : JsonObjectRequest(
-                Method.POST, VAR.url("reciclador_status"),parameters,
-                Response.Listener { response ->
-
-                    if(response!=null){
-                        if(response.getInt("estado") == 200 ){
-                            Prefs.putInt(Prefs.RECICLADOR_ESTADO, estado)
-                            Toast.makeText(applicationContext,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
-                        }else{
-                            Prefs.putInt(Prefs.RECICLADOR_ESTADO, estado)
-
-                            var estadoReciclador = Prefs.pullInt(Prefs.RECICLADOR_ESTADO)
-                            if(estadoReciclador<1){ estadoReciclador = 1 }
-                            actualizarEstadoReciclador(parent)
-                            Toast.makeText(applicationContext,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
-                },
-                Response.ErrorListener{
-                    try {
-                        val nr = it.networkResponse
-                        val r = String(nr.data)
-                        val response=  JSONObject(r)
-                        Prefs.putInt(Prefs.RECICLADOR_ESTADO, estado)
-                        var estadoReciclador = Prefs.pullInt(Prefs.RECICLADOR_ESTADO)
-                        if(estadoReciclador<1){ estadoReciclador = 1 }
-                        actualizarEstadoReciclador(parent)
-                        Toast.makeText(applicationContext,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
-                    }catch (ex: Exception){
-                        Log.e("error", ex.message.toString())
-                        ex.printStackTrace()
-                        Toast.makeText(applicationContext,  "Error de conexión", Toast.LENGTH_SHORT).show()
-                    }
-
-                }) {
-                override fun getHeaders(): Map<String, String> {
-                    var params: MutableMap<String, String> =HashMap()
-                    params["TOKEN"] =  Prefs.pullToken()
-                    return params
-                }
-            }
-
-            val requestQueue = Volley.newRequestQueue(this)
-            requestQueue.add(request)
+           updateStatusReciclador(estado)
         }
 
+    }
+
+    fun updateStatusReciclador(estado:Int){
+        val params = HashMap<String,Any>()
+        params["id"] =  Prefs.pullId()
+        params["status"] = estado
+
+        val parameters = JSONObject(params as Map<String, Any>)
+
+        val request : JsonObjectRequest = object : JsonObjectRequest(
+            Method.POST, VAR.url("reciclador_status"),parameters,
+            Response.Listener { response ->
+
+                if(response!=null){
+                        Prefs.putInt(Prefs.RECICLADOR_ESTADO, estado)
+                        var estado = Prefs.pullInt(Prefs.RECICLADOR_ESTADO)
+                        if(estado<1){ estado = 1 }
+                        estadoReciclador?.selectedIndex = estado - 1
+                        actualizarEstadoReciclador()
+                        Toast.makeText(applicationContext,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
+                }
+
+            },
+            Response.ErrorListener{
+                try {
+                    val nr = it.networkResponse
+                    val r = String(nr.data)
+                    val response=  JSONObject(r)
+                    Prefs.putInt(Prefs.RECICLADOR_ESTADO, estado)
+                    var estado = Prefs.pullInt(Prefs.RECICLADOR_ESTADO)
+                    if(estado<1){ estado = 1 }
+                    estadoReciclador?.selectedIndex = estado - 1
+                    actualizarEstadoReciclador()
+
+                    Toast.makeText(applicationContext,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
+                }catch (ex: Exception){
+                    Log.e("error", ex.message.toString())
+                    ex.printStackTrace()
+                    Toast.makeText(applicationContext,  "Error de conexión", Toast.LENGTH_SHORT).show()
+                }
+
+            }) {
+            override fun getHeaders(): Map<String, String> {
+                var params: MutableMap<String, String> =HashMap()
+                params["TOKEN"] =  Prefs.pullToken()
+                return params
+            }
+        }
+
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(request)
     }
 
     override fun onBackPressed() {
@@ -395,7 +392,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     Toast.makeText(this,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
                 }catch (ex: Exception){
                     ex.printStackTrace()
-                    Toast.makeText(this,  "Error de conexión", Toast.LENGTH_SHORT).show()
+                  //  Toast.makeText(this,  "Error de conexión", Toast.LENGTH_SHORT).show()
                 }
 
             }) {

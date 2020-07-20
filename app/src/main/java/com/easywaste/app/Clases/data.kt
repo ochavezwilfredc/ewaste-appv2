@@ -255,7 +255,7 @@ class Prefs {
         val posiciones_recicladores = "posicionesrecicladores"
         fun getInstance(context: Context, change: Boolean = false) {
             if (change || instance == null) {
-                instance = context.getSharedPreferences("easywaste", 0)
+                instance = context.getSharedPreferences("easywaste111", 0)
             }
         }
         fun putId(id: Int) {

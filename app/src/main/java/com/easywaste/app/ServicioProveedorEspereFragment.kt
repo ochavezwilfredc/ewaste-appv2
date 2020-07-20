@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -82,12 +83,11 @@ class ServicioProveedorEspereFragment : Fragment() {
     fun buscarServicio(){
 
 
-        val params = HashMap<String,Any>()
-        params["servicio_id"] =  Prefs.pullServicioId()
-        val parameters = JSONObject(params as Map<String, Any>)
-
+        val params = JSONObject()
+        params.put("servicio_id",  Prefs.pullServicioId())
+        Log.d("parametrosServicio", params.toString())
         val request : JsonObjectRequest = object : JsonObjectRequest(
-            Method.POST, VAR.url("servicio_info"),parameters,
+            Method.POST, VAR.url("servicio_info"),params,
             Response.Listener { response ->
 
                 if(response!=null){
@@ -129,7 +129,24 @@ class ServicioProveedorEspereFragment : Fragment() {
                             OK = false
                             mainActivity?.cambiarFragment(ServicioProveedorEnCaminoFragment())
                             btnCancelarServicio?.visibility = View.GONE
-                        }else if(estado == "Finalizado"){
+                         }else if(estado=="Cancelado"){
+
+                                try {
+                                    OK = false
+                                    if(!datos.isNull("nuevo_id")){
+                                        val  nuevo_id = datos.getInt("nuevo_id")
+                                        Prefs.putServicioId(nuevo_id)
+                                        Prefs.putServicioRecicladoresCercanos("")
+                                        Log.d("servicioIDCambio", nuevo_id.toString())
+                                        val mainActivity:MainActivity = activity as MainActivity
+                                        mainActivity.cambiarFragment(ServicioProveedorEspereFragment())
+                                    }
+                                }catch (ex:Exception){
+                                    //OK = false
+                                }
+                            }
+
+                        else if(estado == "Finalizado"){
                             OK = false
                             mainActivity?.cambiarFragment(ServicioProveedorFinalizadoFragment())
 

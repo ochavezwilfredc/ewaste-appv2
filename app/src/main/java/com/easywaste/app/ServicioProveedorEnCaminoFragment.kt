@@ -101,12 +101,14 @@ class ServicioProveedorEnCaminoFragment : Fragment() {
     }
 
     fun buscarServicioProveedorEstado(){
-        val params = HashMap<String,Any>()
-        params["servicio_id"] =  Prefs.pullServicioId()
-        val parameters = JSONObject(params as Map<String, Any>)
+
+        val params = JSONObject()
+        params.put("servicio_id",  Prefs.pullServicioId())
+        Log.d("parametrosServicio", params.toString())
+
 
         val request : JsonObjectRequest = object : JsonObjectRequest(
-            Method.POST, VAR.url("servicio_info"),parameters,
+            Method.POST, VAR.url("servicio_info"),params,
             Response.Listener { response ->
 
                 if(response!=null){
@@ -119,10 +121,12 @@ class ServicioProveedorEnCaminoFragment : Fragment() {
                         val reciclador = datos.getString("reciclador")
                         nombreReciclador = reciclador
                         val reciclador_dni = datos.getString("reciclador_dni")
-                        val tiempo_aproximado = datos.getInt("tiempo_aprox_atencion")
+                        var tiempo_aproximado = 0
+                        if(!datos.isNull("tiempo_aprox_atencion")) {
+                            tiempo_aproximado = datos.getInt("tiempo_aprox_atencion")
+                        }
                         SERVICIO = ClsServicio(Prefs.pullServicioId(), proveedor)
                         SERVICIO_DIRECCION = ClsServicioDireccion("" , LatLng(latitud,longitud))
-
 
                         if (estado == "En Camino"){
                             if(posicionProveedor==null){
@@ -136,6 +140,21 @@ class ServicioProveedorEnCaminoFragment : Fragment() {
                             buscarPosicionReciclador()
                         }else if(estado=="En Atencion"){
                             txtLLego?.visibility = View.VISIBLE
+                        }else if(estado=="Cancelado"){
+
+                            try {
+                                OK = false
+                                if(!datos.isNull("nuevo_id")){
+                                    val  nuevo_id = datos.getInt("nuevo_id")
+                                    Prefs.putServicioId(nuevo_id)
+                                    Prefs.putServicioRecicladoresCercanos("")
+                                    Log.d("servicioIDCambio", nuevo_id.toString())
+                                    val mainActivity:MainActivity = activity as MainActivity
+                                    mainActivity.cambiarFragment(ServicioProveedorEspereFragment())
+                                }
+                            }catch (ex:Exception){
+                                //OK = false
+                            }
                         }
                         else if(estado == "Finalizado"){
 

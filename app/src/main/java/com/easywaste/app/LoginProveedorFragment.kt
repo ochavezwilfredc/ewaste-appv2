@@ -124,9 +124,12 @@ class LoginProveedorFragment : Fragment(){
                    AlertaMensaje.mostrarSuccess(activity!! ,response.getString("mensaje"))
                    Prefs.putString(Prefs.USUARIOLOGIN, dni)
                    Prefs.putRolId(3)
-                   leerDatosPersona(response.getJSONObject("datos"))
-                   btnIngresar?.isEnabled = true
+                   val datos = response.getJSONObject("datos")
 
+                   leerDatosPersona(datos)
+                   btnIngresar?.isEnabled = true
+                   Prefs.putId(datos.getInt("id"))
+                   Prefs.putServicioId(0)
                    if(cbGuardar!!.isChecked ){
                        Prefs.putPass(pass)
                    }

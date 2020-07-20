@@ -157,10 +157,15 @@ class ServicioRecicladorSolicitudesFragment : Fragment() {
             }, Response.ErrorListener {
 
                 try {
+                    listaServicios.clear()
+                    actualizarServicios()
+                    /*
                     val nr = it.networkResponse
                     val r = String(nr.data)
                     val response = JSONObject(r)
+
                     //Toast.makeText(context,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
+                     */
                 } catch (ex: Exception) {
                     ex.printStackTrace()
                    // Toast.makeText(context, "Error de conexión", Toast.LENGTH_SHORT).show()
