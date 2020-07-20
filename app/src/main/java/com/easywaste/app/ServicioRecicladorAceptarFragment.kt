@@ -100,13 +100,12 @@ class ServicioRecicladorAceptarFragment : Fragment() {
             Response.Listener { response ->
                 if(response!=null){
                     if(response.getInt("estado") == 200 ){
-                        activity?.updateStatusReciclador(1)
                         AlertaMensaje.mostrarSuccess(activity!! ,response.getString("mensaje"))
 
                     }else{
                         AlertaMensaje.mostrarError(activity!!,response.getString("mensaje"))
                     }
-
+                    activity.updateStatusReciclador(1)
                     activity.onBackPressed()
                 }
 

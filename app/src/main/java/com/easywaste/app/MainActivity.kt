@@ -146,10 +146,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             estadoReciclador?.setOnSpinnerItemSelectedListener { parent, view, position, id ->
                 actualizarEstadoReciclador(true)
             }
+
+
             var estado = Prefs.pullInt(Prefs.RECICLADOR_ESTADO)
             if(estado<1){ estado = 1 }
-            estadoReciclador?.selectedIndex = estado - 1
-            updateStatusReciclador(estado)
+            estadoReciclador?.selectedIndex = estado -1
+            actualizarEstadoReciclador()
+
             if(Prefs.pullServicioRecicladorId() !=0){
                 val frag = ServicioRecicladorOperacionFragment()
                 cambiarFragment(frag)
@@ -157,7 +160,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val frag = ServicioRecicladorSolicitudesFragment()
                 cambiarFragment(frag)
             }
-
 
             OK = true
 
@@ -274,21 +276,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun updateStatusReciclador(estado:Int){
-        val params = HashMap<String,Any>()
-        params["id"] =  Prefs.pullId()
-        params["status"] = estado
-
-        val parameters = JSONObject(params as Map<String, Any>)
+        val params = JSONObject()
+        params.put("id", Prefs.pullId())
+        params.put("status", estado)
 
         val request : JsonObjectRequest = object : JsonObjectRequest(
-            Method.POST, VAR.url("reciclador_status"),parameters,
+            Method.POST, VAR.url("reciclador_status"),params,
             Response.Listener { response ->
 
                 if(response!=null){
                         Prefs.putInt(Prefs.RECICLADOR_ESTADO, estado)
-                        var estado = Prefs.pullInt(Prefs.RECICLADOR_ESTADO)
-                        if(estado<1){ estado = 1 }
-                        estadoReciclador?.selectedIndex = estado - 1
+                        var est = Prefs.pullInt(Prefs.RECICLADOR_ESTADO)
+                        if(est<1){ est = 1 }
+                        estadoReciclador?.selectedIndex = est - 1
                         actualizarEstadoReciclador()
                         Toast.makeText(applicationContext,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
                 }
@@ -300,11 +300,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     val r = String(nr.data)
                     val response=  JSONObject(r)
                     Prefs.putInt(Prefs.RECICLADOR_ESTADO, estado)
-                    var estado = Prefs.pullInt(Prefs.RECICLADOR_ESTADO)
-                    if(estado<1){ estado = 1 }
-                    estadoReciclador?.selectedIndex = estado - 1
+                    var est = Prefs.pullInt(Prefs.RECICLADOR_ESTADO)
+                    if(est<1){ est = 1 }
+                    estadoReciclador?.selectedIndex = est - 1
                     actualizarEstadoReciclador()
-
                     Toast.makeText(applicationContext,  response.getString("mensaje"), Toast.LENGTH_SHORT).show()
                 }catch (ex: Exception){
                     Log.e("error", ex.message.toString())
