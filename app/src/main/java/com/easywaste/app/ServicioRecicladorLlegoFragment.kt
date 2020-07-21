@@ -202,10 +202,11 @@ class ServicioRecicladorLlegoFragment : Fragment() {
                 if(response!=null){
                     if(response.getInt("estado") == 200 ){
                         Prefs.putServicioRecicladorId(0)
-                        mainActivity.updateStatusReciclador(1)
                         AlertaMensaje.mostrarSuccess(activity!!,response.getString("mensaje"))
+                        mainActivity.updateStatusReciclador(1)
                         val frag = ServicioRecicladorSolicitudesFragment()
                         mainActivity.cambiarFragment(frag)
+                        mainActivity.updateStatusReciclador(1)
                     }else{
                         AlertaMensaje.mostrarError(activity!!,response.getString("mensaje"))
                     }

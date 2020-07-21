@@ -188,7 +188,9 @@ class ServicioRecicladorOperacionFragment : Fragment() {
                         }else if(estado=="Finalizado"){
                             Prefs.putServicioRecicladorId(0)
                             val mainActivity:MainActivity = activity as MainActivity
+                            mainActivity.updateStatusReciclador(1)
                             mainActivity.cambiarFragment(ServicioRecicladorSolicitudesFragment())
+
                         }
 
                     }else{
